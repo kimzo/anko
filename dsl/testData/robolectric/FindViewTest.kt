@@ -43,16 +43,17 @@ public class RobolectricTest() {
         val verticalLayout = activity.findViewById(1) as? LinearLayout
         val relativeLayout = activity.findViewById(2) as? RelativeLayout
 
-        val button = relativeLayout.findViewById(3) as? Button
-        val textView = verticalLayout.findViewById(4) as? TextView
-
         assertNotNull(verticalLayout)
         assertNotNull(relativeLayout)
+
+        val button = relativeLayout!!.findViewById(3) as? Button
+        val textView = verticalLayout!!.findViewById(4) as? TextView
+
         assertNotNull(button)
         assertNotNull(textView)
 
-        assertEquals(2, verticalLayout.size)
-        assertEquals(1, relativeLayout.size)
+        assertEquals(2, verticalLayout!!.getChildCount())
+        assertEquals(1, relativeLayout!!.getChildCount())
 
         println("[COMPLETE]")
     }
