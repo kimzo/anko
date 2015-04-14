@@ -9,6 +9,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.*
 import org.junit.Test
 import kotlin.test.*
+import org.junit.Assert.*
 
 public open class TestActivity() : Activity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
@@ -39,11 +40,19 @@ public class RobolectricTest() {
     public fun test() {
         val activity = Robolectric.buildActivity(javaClass<TestActivity>()).create().get()
 
-        val verticalLayout = activity.find<LinearLayout>(1)
-        val relativeLayout = activity.find<RelativeLayout>(2)
+        val verticalLayout = activity.findViewById(1) as? LinearLayout
+        val relativeLayout = activity.findViewById(2) as? RelativeLayout
 
-        val button = relativeLayout.find<Button>(3)
-        val textView = verticalLayout.find<TextView>(4)
+        val button = relativeLayout.findViewById(3) as? Button
+        val textView = verticalLayout.findViewById(4) as? TextView
+
+        assertNotNull(verticalLayout)
+        assertNotNull(relativeLayout)
+        assertNotNull(button)
+        assertNotNull(textView)
+
+        assertEquals(2, verticalLayout.size)
+        assertEquals(1, relativeLayout.size)
 
         println("[COMPLETE]")
     }
